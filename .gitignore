@@ -1,0 +1,9 @@
+.stack-work/
+*~
+out
+dist-newstyle
+
+.idea
+*.iml
+
+*.prof

@@ -1,0 +1,70 @@
+name:                basic-xml-benchmark-hs
+version:             0.1.0.0
+github:              "dozed/basic-xml-benchmark-hs"
+license:             BSD3
+author:              "Stefan Ollinger"
+maintainer:          "stefan.ollinger@gmx.de"
+copyright:           "2023 Stefan Ollinger"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/dozed/basic-xml-benchmark-hs#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+  dependencies:
+  - bytestring
+  - conduit
+  - containers
+  - deepseq
+  - deepseq-generics
+  - hexml
+  - hexpat
+  - hxt
+  - resourcet
+  - text
+  - transformers
+  - uuid
+  - xeno
+  - xml
+  - xml-conduit
+  - xml-types
+
+executables:
+  basic-xml-benchmark-hs-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - basic-xml-benchmark-hs
+    - criterion
+
+tests:
+  basic-xml-benchmark-hs-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - basic-xml-benchmark-hs
+    - hspec
