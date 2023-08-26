@@ -8,8 +8,7 @@ import qualified Data.Map as M
 import Data.Maybe (listToMaybe, mapMaybe)
 import qualified Data.Text as T
 import PublicationParser (PublicationParser (..))
-import Text.XML hiding (parseText)
-import qualified Text.XML as X
+import Text.XML (Element, Name (..), Node (..), def, documentRoot, elementAttributes, elementName, elementNodes, nameLocalName, parseLBS)
 
 localName :: Element -> T.Text
 localName = nameLocalName . elementName
@@ -46,7 +45,7 @@ getTextAtTag tag n = getText <$> atTag tag n
 parseElement :: FilePath -> IO Element
 parseElement file = do
   txt <- LBS.readFile file
-  let Right doc = X.parseLBS def txt
+  let Right doc = parseLBS def txt
       bibElement = documentRoot doc
   return bibElement
 
