@@ -1,6 +1,8 @@
 # basic-xml-benchmark-hs
 
-Benchmark of several Haskell XML libraries against parsing the following structure (real data in [neurips2022.xml](https://github.com/dozed/basic-xml-benchmark-hs/blob/main/data/neurips2022.xml)):
+Benchmark of several Haskell XML libraries against parsing [neurips2022.xml](https://github.com/dozed/basic-xml-benchmark-hs/blob/main/data/neurips2022.xml).
+
+Example:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
