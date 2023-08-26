@@ -38,6 +38,7 @@ XML libraries:
 - [xeno 0.6](https://hackage.haskell.org/package/xeno-0.6)
 - [hexpat 0.20.13](https://hackage.haskell.org/package/hexpat-0.20.13)
 - [xml-conduit 1.9.1.3](https://hackage.haskell.org/package/xml-conduit-1.9.1.3)
+- [xml-nodestream](https://github.com/travisbrown/xml-nodestream)
 
 Results:
 
