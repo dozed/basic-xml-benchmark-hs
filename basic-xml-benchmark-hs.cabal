@@ -24,6 +24,10 @@ source-repository head
 
 library
   exposed-modules:
+      AddUUIDsHxt
+      AddUUIDsXmlConduitDom
+      AddUUIDsXmlCursor
+      AddUUIDsXmlDom
       PublicationData
       PublicationParser
       PublicationParserHexml

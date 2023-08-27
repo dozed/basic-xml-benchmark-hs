@@ -1,6 +1,6 @@
 # basic-xml-benchmark-hs
 
-Benchmark of several Haskell XML libraries against parsing [neurips2022.xml](https://github.com/dozed/basic-xml-benchmark-hs/blob/main/data/neurips2022.xml).
+Benchmark of several Haskell XML libraries against parsing [neurips2022.xml](https://github.com/dozed/basic-xml-benchmark-hs/blob/main/data/neurips2022.xml) and adding UUIDs to a subset of elements.
 
 Example:
 
@@ -42,70 +42,99 @@ XML libraries:
 - [xml-conduit 1.9.1.3](https://hackage.haskell.org/package/xml-conduit-1.9.1.3)
 - [xml-nodestream](https://github.com/travisbrown/xml-nodestream)
 
-Results:
+# Results
 
 ![](benchmark.png)
 
 ```
-benchmarking tp/xml
-time                 421.9 ms   (351.7 ms .. 508.4 ms)
-                     0.995 R²   (0.984 R² .. 1.000 R²)
-mean                 427.1 ms   (410.9 ms .. 440.1 ms)
-std dev              16.22 ms   (10.27 ms .. 19.29 ms)
+benchmarking parse/xml
+time                 432.9 ms   (364.6 ms .. 473.3 ms)
+                     0.997 R²   (0.992 R² .. 1.000 R²)
+mean                 412.6 ms   (390.5 ms .. 421.3 ms)
+std dev              15.25 ms   (3.663 ms .. 20.17 ms)
 variance introduced by outliers: 19% (moderately inflated)
 
-benchmarking tp/hxt
-time                 960.5 ms   (814.1 ms .. 1.075 s)
-                     0.997 R²   (0.991 R² .. 1.000 R²)
-mean                 990.1 ms   (964.5 ms .. 1.014 s)
-std dev              30.63 ms   (14.00 ms .. 41.97 ms)
-variance introduced by outliers: 19% (moderately inflated)
-
-benchmarking tp/hexml
-time                 39.33 ms   (38.24 ms .. 41.17 ms)
-                     0.996 R²   (0.991 R² .. 0.999 R²)
-mean                 41.63 ms   (40.63 ms .. 43.66 ms)
-std dev              2.922 ms   (1.302 ms .. 4.152 ms)
-variance introduced by outliers: 25% (moderately inflated)
-
-benchmarking tp/xeno
-time                 51.76 ms   (50.85 ms .. 52.94 ms)
+benchmarking parse/hxt
+time                 956.0 ms   (844.8 ms .. 1.062 s)
                      0.998 R²   (0.994 R² .. 1.000 R²)
-mean                 52.21 ms   (51.39 ms .. 53.11 ms)
-std dev              1.814 ms   (1.205 ms .. 2.490 ms)
+mean                 970.5 ms   (954.6 ms .. 997.5 ms)
+std dev              25.76 ms   (537.4 μs .. 31.49 ms)
+variance introduced by outliers: 19% (moderately inflated)
 
-benchmarking tp/hexpat (ByteString)
-time                 172.2 ms   (159.8 ms .. 185.4 ms)
-                     0.996 R²   (0.989 R² .. 1.000 R²)
-mean                 178.8 ms   (174.3 ms .. 181.1 ms)
-std dev              4.605 ms   (1.956 ms .. 7.212 ms)
-variance introduced by outliers: 12% (moderately inflated)
+benchmarking parse/hexml
+time                 38.09 ms   (37.00 ms .. 39.33 ms)
+                     0.996 R²   (0.988 R² .. 0.999 R²)
+mean                 39.87 ms   (38.72 ms .. 41.86 ms)
+std dev              3.184 ms   (1.543 ms .. 5.557 ms)
+variance introduced by outliers: 32% (moderately inflated)
 
-benchmarking tp/hexpat (String)
-time                 259.9 ms   (242.1 ms .. 283.1 ms)
-                     0.996 R²   (0.990 R² .. 1.000 R²)
-mean                 259.7 ms   (252.9 ms .. 270.4 ms)
-std dev              11.36 ms   (6.135 ms .. 15.09 ms)
+benchmarking parse/xeno
+time                 50.06 ms   (48.96 ms .. 51.26 ms)
+                     0.997 R²   (0.994 R² .. 0.999 R²)
+mean                 51.21 ms   (50.03 ms .. 54.44 ms)
+std dev              3.622 ms   (1.307 ms .. 6.325 ms)
+variance introduced by outliers: 22% (moderately inflated)
+
+benchmarking parse/hexpat (ByteString)
+time                 175.5 ms   (165.0 ms .. 185.0 ms)
+                     0.997 R²   (0.993 R² .. 1.000 R²)
+mean                 182.0 ms   (177.4 ms .. 187.2 ms)
+std dev              6.489 ms   (3.432 ms .. 8.834 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking parse/hexpat (String)
+time                 259.2 ms   (256.2 ms .. 262.1 ms)
+                     1.000 R²   (0.999 R² .. 1.000 R²)
+mean                 266.6 ms   (263.3 ms .. 277.6 ms)
+std dev              6.344 ms   (1.170 ms .. 8.791 ms)
 variance introduced by outliers: 16% (moderately inflated)
 
-benchmarking tp/hexpat (Text)
-time                 169.0 ms   (161.0 ms .. 191.7 ms)
-                     0.990 R²   (0.968 R² .. 1.000 R²)
-mean                 179.4 ms   (173.9 ms .. 187.5 ms)
-std dev              9.786 ms   (6.701 ms .. 12.04 ms)
-variance introduced by outliers: 13% (moderately inflated)
+benchmarking parse/hexpat (Text)
+time                 163.6 ms   (159.5 ms .. 169.6 ms)
+                     0.999 R²   (0.997 R² .. 1.000 R²)
+mean                 168.5 ms   (165.4 ms .. 175.9 ms)
+std dev              6.880 ms   (1.886 ms .. 9.921 ms)
+variance introduced by outliers: 12% (moderately inflated)
 
-benchmarking tp/xml-conduit (DOM)
-time                 207.9 ms   (197.7 ms .. 216.9 ms)
+benchmarking parse/xml-conduit (DOM)
+time                 202.5 ms   (180.7 ms .. 216.3 ms)
+                     0.994 R²   (0.978 R² .. 1.000 R²)
+mean                 201.6 ms   (196.4 ms .. 205.0 ms)
+std dev              6.073 ms   (4.058 ms .. 8.569 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking parse/xml-conduit (StreamDOM)
+time                 225.7 ms   (221.9 ms .. 230.3 ms)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 221.4 ms   (214.5 ms .. 223.9 ms)
+std dev              5.826 ms   (358.0 μs .. 8.374 ms)
+variance introduced by outliers: 14% (moderately inflated)
+
+benchmarking add-uuids/xml (DOM)
+time                 471.7 ms   (364.7 ms .. 555.0 ms)
+                     0.994 R²   (0.979 R² .. 1.000 R²)
+mean                 500.0 ms   (480.3 ms .. 515.6 ms)
+std dev              19.27 ms   (2.497 ms .. 23.96 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking add-uuids/xml (Cursor)
+time                 461.8 ms   (453.4 ms .. 475.9 ms)
+                     1.000 R²   (1.000 R² .. 1.000 R²)
+mean                 461.2 ms   (457.4 ms .. 463.8 ms)
+std dev              4.323 ms   (2.093 ms .. 5.878 ms)
+variance introduced by outliers: 19% (moderately inflated)
+
+benchmarking add-uuids/hxt
+time                 949.2 ms   (865.4 ms .. 1.038 s)
                      0.999 R²   (0.996 R² .. 1.000 R²)
-mean                 203.4 ms   (198.2 ms .. 207.1 ms)
-std dev              6.235 ms   (4.650 ms .. 8.175 ms)
-variance introduced by outliers: 14% (moderately inflated)
+mean                 969.2 ms   (952.3 ms .. 983.5 ms)
+std dev              19.70 ms   (16.43 ms .. 22.20 ms)
+variance introduced by outliers: 19% (moderately inflated)
 
-benchmarking tp/xml-conduit (StreamDOM)
-time                 233.8 ms   (227.1 ms .. 237.3 ms)
-                     1.000 R²   (0.998 R² .. 1.000 R²)
-mean                 231.6 ms   (229.4 ms .. 233.4 ms)
-std dev              3.007 ms   (2.085 ms .. 4.184 ms)
-variance introduced by outliers: 14% (moderately inflated)
+benchmarking add-uuids/xml-conduit (DOM)
+time                 364.1 ms   (338.1 ms .. 419.4 ms)
+                     0.997 R²   (0.994 R² .. 1.000 R²)
+mean                 355.2 ms   (347.7 ms .. 361.5 ms)
+std dev              8.021 ms   (3.638 ms .. 10.49 ms)
+variance introduced by outliers: 19% (moderately inflated)
 ```
