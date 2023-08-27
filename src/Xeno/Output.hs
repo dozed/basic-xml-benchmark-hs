@@ -8,6 +8,8 @@ import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
 import Xeno.DOM
 
+-- Adapted from: Text.XML.Light.Output
+
 type QName = BS.ByteString
 type CData = BS.ByteString
 
