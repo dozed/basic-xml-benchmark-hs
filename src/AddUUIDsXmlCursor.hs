@@ -6,7 +6,7 @@ import qualified Data.ByteString.Lazy as LBS
 import Data.Set (Set)
 import qualified Data.Set as S
 import Data.UUID.V4 (nextRandom)
-import Text.XML.Light.Cursor
+import Text.XML.Light.Cursor (Cursor, fromForest, modifyContentM, nextDF, toForest)
 import Text.XML.Light.Input (parseXML)
 import Text.XML.Light.Output (showContent)
 import Text.XML.Light.Types (Attr (..), Content (..), Element (..), QName (..))

@@ -1,9 +1,9 @@
 module Main (main) where
 
 import qualified AddUUIDsHxt
+import qualified AddUUIDsXmlConduitDom
 import qualified AddUUIDsXmlCursor
 import qualified AddUUIDsXmlDom
-import qualified AddUUIDsXmlConduitDom
 import Criterion.Main
 import PublicationParser (parsePublications)
 import qualified PublicationParserHexml
@@ -15,7 +15,7 @@ import qualified PublicationParserXeno
 import qualified PublicationParserXml
 import qualified PublicationParserXmlConduitDom
 import qualified PublicationParserXmlConduitNodeStream
-import System.IO (openTempFile, hClose)
+import System.IO (hClose, openTempFile)
 
 doBenchmark :: IO ()
 doBenchmark = do
