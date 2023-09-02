@@ -2,7 +2,7 @@
 
 module AddUUIDsHexpatLens (addUUIDs) where
 
-import Control.Lens hiding (children)
+import Control.Lens (transformM)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import Data.Set (Set)
@@ -12,7 +12,7 @@ import qualified Data.Text.Encoding as T
 import Data.UUID.V4 (nextRandom)
 import Text.XML.Expat.Format
 import Text.XML.Expat.Lens ()
-import Text.XML.Expat.Tree
+import Text.XML.Expat.Tree (NodeG (..), UAttributes, UNode, defaultParseOptions, parse')
 
 uuidName :: ByteString
 uuidName = "uuid"
