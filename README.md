@@ -39,8 +39,11 @@ XML libraries:
 - [hexml 0.3.4](https://hackage.haskell.org/package/hexml-0.3.4)
 - [xeno 0.6](https://hackage.haskell.org/package/xeno-0.6)
 - [hexpat 0.20.13](https://hackage.haskell.org/package/hexpat-0.20.13)
+- [hexpat-lens 0.1.9](https://hackage.haskell.org/package/hexpat-lens-0.1.9)
 - [xml-conduit 1.9.1.3](https://hackage.haskell.org/package/xml-conduit-1.9.1.3)
 - [xml-nodestream](https://github.com/travisbrown/xml-nodestream)
+- [xml-lens 0.3.1](https://hackage.haskell.org/package/xml-lens-0.3.1)
+
 
 # Results
 
