@@ -1,9 +1,9 @@
 module Main (main) where
 
 import qualified AddUUIDsHxt
-import qualified AddUUIDsXmlConduitDom
 import qualified AddUUIDsXmlCursor
 import qualified AddUUIDsXmlDom
+import qualified AddUUIDsHexpatLens
 import Criterion.Main
 import PublicationParser (parsePublications)
 import qualified PublicationParserHexml
@@ -49,7 +49,8 @@ addUUIDsBenchmark xmlFile tmpFile =
     [ bench "xml (DOM)"         $ nfIO $ AddUUIDsXmlDom.addUUIDs xmlFile tmpFile,
       bench "xml (Cursor)"      $ nfIO $ AddUUIDsXmlCursor.addUUIDs xmlFile tmpFile,
       bench "hxt"               $ nfIO $ AddUUIDsHxt.addUUIDs xmlFile tmpFile,
-      bench "xml-conduit (DOM)" $ nfIO $ AddUUIDsXmlConduitDom.addUUIDs xmlFile tmpFile
+      bench "hexpat (Lens)"     $ nfIO $ AddUUIDsHxt.addUUIDs xmlFile tmpFile,
+      bench "xml-conduit (DOM)" $ nfIO $ AddUUIDsHexpatLens.addUUIDs xmlFile tmpFile
     ]
 
 main :: IO ()

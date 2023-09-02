@@ -3,7 +3,14 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: hexpat-tagsoup-0.1@sha256:0e6dfae74d22b05c8d544d59c8c0a84cffbdfce65bdf410f4e3353c9b8789e36,1344
+    pantry-tree:
+      sha256: c2966b5ae3163a2160c6a883fad9c8bd3e9883a1933c47d7569d8a33f9a48fde
+      size: 225
+  original:
+    hackage: hexpat-tagsoup-0.1
 snapshots:
 - completed:
     sha256: 2fc12a405ab6f7eac73eb11a0ca5ccca0e956bd2848db780c140b7406ff9ebb5

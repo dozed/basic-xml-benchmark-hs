@@ -24,6 +24,7 @@ source-repository head
 
 library
   exposed-modules:
+      AddUUIDsHexpatLens
       AddUUIDsHxt
       AddUUIDsXmlConduitDom
       AddUUIDsXmlCursor
@@ -39,6 +40,11 @@ library
       PublicationParserXml
       PublicationParserXmlConduitDom
       PublicationParserXmlConduitNodeStream
+      Text.XML.Expat.Lens
+      Text.XML.Expat.Lens.Generic
+      Text.XML.Expat.Lens.Names
+      Text.XML.Expat.Lens.Parse
+      Text.XML.Expat.Lens.Unqualified
       Text.XML.Stream.Node
       Xeno.Output
   other-modules:
@@ -55,7 +61,9 @@ library
     , deepseq-generics
     , hexml
     , hexpat
+    , hexpat-tagsoup
     , hxt
+    , lens
     , resourcet
     , text
     , transformers

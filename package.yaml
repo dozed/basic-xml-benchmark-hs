@@ -35,7 +35,9 @@ library:
   - deepseq-generics
   - hexml
   - hexpat
+  - hexpat-tagsoup
   - hxt
+  - lens
   - resourcet
   - text
   - transformers
