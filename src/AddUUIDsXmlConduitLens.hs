@@ -2,7 +2,7 @@
 
 module AddUUIDsXmlConduitLens (addUUIDs) where
 
-import Control.Lens (transformM)
+import Control.Lens (mapMOf, transformM)
 import qualified Data.ByteString.Lazy as LBS
 import Data.Map (Map)
 import qualified Data.Map as M
@@ -12,7 +12,7 @@ import qualified Data.Text as T
 import Data.UUID.V4 (nextRandom)
 import Text.XML (def, parseLBS)
 import qualified Text.XML as X
-import Text.XML.Lens (Document (..), Element (..), Name (..), documentRoot)
+import Text.XML.Lens (Document (..), Element (..), Name (..), attrs, documentRoot)
 
 mkName :: T.Text -> Name
 mkName tag = Name tag Nothing Nothing
@@ -37,12 +37,10 @@ ensureUUIDinAttrs attributes =
       pure attrs'
 
 addUUID :: Element -> IO Element
-addUUID (Element n a cs) =
+addUUID e@(Element n _ _) =
   if S.member n uuidTags
-    then do
-      a' <- ensureUUIDinAttrs a
-      return $ Element n a' cs
-    else pure $ Element n a cs
+    then mapMOf attrs ensureUUIDinAttrs e
+    else pure e
 
 addUUIDs :: FilePath -> FilePath -> IO ()
 addUUIDs inFile outFile = do

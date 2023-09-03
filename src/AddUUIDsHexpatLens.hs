@@ -2,7 +2,7 @@
 
 module AddUUIDsHexpatLens (addUUIDs) where
 
-import Control.Lens (transformM)
+import Control.Lens (mapMOf, transformM)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import Data.Set (Set)
@@ -11,7 +11,7 @@ import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
 import Data.UUID.V4 (nextRandom)
 import Text.XML.Expat.Format
-import Text.XML.Expat.Lens ()
+import Text.XML.Expat.Lens (attributes)
 import Text.XML.Expat.Tree (NodeG (..), UAttributes, UNode, defaultParseOptions, parse')
 
 uuidName :: ByteString
@@ -33,12 +33,10 @@ ensureUUIDinAttrs attrs =
       pure $ (uuidName, T.encodeUtf8 . T.pack . show $ uuid) : attrs
 
 addUUID :: UNode ByteString -> IO (UNode ByteString)
-addUUID (Element n a cs) =
+addUUID e@(Element n _ _) =
   if S.member n uuidTags
-    then do
-      a' <- ensureUUIDinAttrs a
-      return $ Element n a' cs
-    else pure $ Element n a cs
+    then mapMOf attributes ensureUUIDinAttrs e
+    else pure e
 addUUID x = pure x
 
 addUUIDs :: FilePath -> FilePath -> IO ()
