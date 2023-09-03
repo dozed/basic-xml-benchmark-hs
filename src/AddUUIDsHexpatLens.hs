@@ -30,7 +30,8 @@ ensureUUIDinAttrs attrs =
     (_, _ : _) -> pure attrs
     (_, []) -> do
       uuid <- nextRandom
-      pure $ (uuidName, T.encodeUtf8 . T.pack . show $ uuid) : attrs
+      let attrs' = (uuidName, T.encodeUtf8 . T.pack . show $ uuid) : attrs
+      pure attrs'
 
 addUUID :: UNode ByteString -> IO (UNode ByteString)
 addUUID e@(Element n _ _) =

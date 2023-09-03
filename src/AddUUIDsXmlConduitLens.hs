@@ -33,8 +33,8 @@ ensureUUIDinAttrs attributes =
     Just _ -> pure attributes
     Nothing -> do
       uuid <- nextRandom
-      let attrs' = M.insert uuidName (T.pack . show $ uuid) attributes
-      pure attrs'
+      let attributes' = M.insert uuidName (T.pack . show $ uuid) attributes
+      pure attributes'
 
 addUUID :: Element -> IO Element
 addUUID e@(Element n _ _) =
