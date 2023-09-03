@@ -10,7 +10,7 @@ import qualified Data.Set as S
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
 import Data.UUID.V4 (nextRandom)
-import Text.XML.Expat.Format
+import Text.XML.Expat.Format (format')
 import Text.XML.Expat.Lens (attributes, name)
 import Text.XML.Expat.Tree (UAttributes, UNode, defaultParseOptions, parse')
 
