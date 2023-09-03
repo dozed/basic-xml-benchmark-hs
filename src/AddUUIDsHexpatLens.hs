@@ -1,9 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE Rank2Types #-}
 
 module AddUUIDsHexpatLens (addUUIDs) where
 
-import Control.Lens (Traversal', mapMOf, transformM)
+import Control.Lens (anyOf, filtered, mapMOf, transformM)
 import Data.ByteString (ByteString)
 import qualified Data.ByteString as BS
 import Data.Set (Set)
@@ -12,13 +11,8 @@ import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
 import Data.UUID.V4 (nextRandom)
 import Text.XML.Expat.Format
-import Text.XML.Expat.Lens (attributes)
-import Text.XML.Expat.Tree (NodeG (..), UAttributes, UNode, defaultParseOptions, parse')
-
-nameIn :: Set ByteString -> Traversal' (UNode ByteString) (UNode ByteString)
-nameIn ns f s
-  | S.member (eName s) ns = f s
-  | otherwise = pure s
+import Text.XML.Expat.Lens (attributes, name)
+import Text.XML.Expat.Tree (UAttributes, UNode, defaultParseOptions, parse')
 
 uuidName :: ByteString
 uuidName = "uuid"
@@ -40,7 +34,7 @@ ensureUUIDinAttrs attrs =
       pure attrs'
 
 addUUID :: UNode ByteString -> IO (UNode ByteString)
-addUUID = mapMOf (nameIn uuidTags . attributes) ensureUUIDinAttrs
+addUUID = mapMOf (filtered (anyOf name (`S.member` uuidTags)) . attributes) ensureUUIDinAttrs
 
 addUUIDs :: FilePath -> FilePath -> IO ()
 addUUIDs inFile outFile = do
