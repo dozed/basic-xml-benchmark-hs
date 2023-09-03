@@ -1,8 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE Rank2Types #-}
 
 module AddUUIDsXmlConduitLens (addUUIDs) where
 
-import Control.Lens (mapMOf, transformM)
+import Control.Lens (Traversal', mapMOf, transformM)
 import qualified Data.ByteString.Lazy as LBS
 import Data.Map (Map)
 import qualified Data.Map as M
@@ -13,6 +14,12 @@ import Data.UUID.V4 (nextRandom)
 import Text.XML (def, parseLBS)
 import qualified Text.XML as X
 import Text.XML.Lens (Document (..), Element (..), Name (..), attrs, documentRoot)
+
+nameIn :: Set Name -> Traversal' Element Element
+nameIn ns f s
+  | S.member (elementName s) ns = f s
+  | otherwise = pure s
+{-# INLINE nameIn #-}
 
 mkName :: T.Text -> Name
 mkName tag = Name tag Nothing Nothing
@@ -37,10 +44,7 @@ ensureUUIDinAttrs attributes =
       pure attributes'
 
 addUUID :: Element -> IO Element
-addUUID e@(Element n _ _) =
-  if S.member n uuidTags
-    then mapMOf attrs ensureUUIDinAttrs e
-    else pure e
+addUUID = mapMOf (nameIn uuidTags . attrs) ensureUUIDinAttrs
 
 addUUIDs :: FilePath -> FilePath -> IO ()
 addUUIDs inFile outFile = do
